@@ -5,7 +5,7 @@ import Header from './components/Header';
 import TaskList from './components/TaskList';
 
  const App = () => {
-const [task,setTasks]=useState([])
+const [tasks,setTasks]=useState([])
 
 useEffect(()=>{
   fetchingData()
@@ -26,8 +26,8 @@ const fetchingData=async()=>{
   return (
     <div className='wrapper bg-gradient-to-t from-gray-900 to-teal-900 min-h-screen text-xl text-gray-100 flex flex-col py-10'>
       <Header/>
-      <AddTask/>
-      <TaskList tasks={task} />
+      <AddTask  tasks={tasks}  setTasks={setTasks}/>
+      <TaskList tasks={tasks} />
       <Footer/>
     </div>
   )

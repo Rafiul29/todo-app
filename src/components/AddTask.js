@@ -1,8 +1,8 @@
 import React, { useState,useRef } from 'react'
 
-const AddTask = () => {
+const AddTask = ({tasks,setTasks}) => {
 
-const [task, setTask]=useState("");
+const [tasks, setTask]=useState("");
 const inputRef=useRef(null);
 
 const addTaskHandler=(e)=>{
@@ -21,6 +21,9 @@ const taskPosting=async(text)=>{
       },
       body: JSON.stringify({text}),
     })
+    const data=await res.json()
+    //real-time data update
+    setTask([...tasks,data])
 }
 
   return (
