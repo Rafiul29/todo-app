@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { createContext, useEffect, useState } from 'react'
 import AddTask from './components/AddTask';
 import Footer from './components/Footer';
 import Header from './components/Header';
 import TaskList from './components/TaskList';
 
+export const DeleteHandlerContext= createContext()
  const App = () => {
 const [tasks,setTasks]=useState([])
 
@@ -23,12 +24,32 @@ const fetchingData=async()=>{
    }
 }
 
+//delete handler 
+const handleDelete=(id)=>{
+ // delete data
+ console.log(id)
+ deleteData(id)
+ // se update task  
+}
+
+const  deleteData=async(id)=>{
+   await fetch(`https://aluminum-delicate-snowshoe.glitch.me/tasks/${id}`,{
+    method:"DELETE",
+    headers:{
+      "Content-type": "application/json"
+    }
+   })
+}
+
+
   return (
     <div className='wrapper bg-gradient-to-t from-gray-900 to-teal-900 min-h-screen text-xl text-gray-100 flex flex-col py-10'>
-      <Header/>
+    <DeleteHandlerContext.Provider value={handleDelete}>
+       <Header/>
       <AddTask  tasks={tasks}  setTasks={setTasks}/>
       <TaskList tasks={tasks} />
       <Footer/>
+    </DeleteHandlerContext.Provider>
     </div>
   )
 }

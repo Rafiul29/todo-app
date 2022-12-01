@@ -1,6 +1,6 @@
 import React, { useState,useRef } from 'react'
 
-const AddTask = ({tasks,setTasks}) => {
+const AddTask = ({task,setTasks}) => {
 
 const [tasks, setTask]=useState("");
 const inputRef=useRef(null);
@@ -22,7 +22,7 @@ const taskPosting=async(text)=>{
       body: JSON.stringify({text}),
     })
     const data=await res.json()
-    //real-time data update
+    //real-time data updat
     setTask([...tasks,data])
 }
 
